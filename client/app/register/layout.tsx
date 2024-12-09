@@ -1,9 +1,12 @@
 'use client'
+
 import {Music} from "lucide-react";
 import Steps from "@/features/register/components/steps";
 import {useEffect, useState} from "react";
 import StepIndicator from "@/features/register/components/stepIndicator";
 import {usePathname} from "next/navigation";
+import Image from "next/image";
+import {RegisterDataContextProvider} from "@/features/register/contexts/registerDataContext";
 
 const RegisterLayout = (
     {
@@ -35,7 +38,7 @@ const RegisterLayout = (
         <div className="w-full h-screen bg-slate-50 flex">
 
 
-            <div className={'h-full hidden lg:block p-12 pr-32'}>
+            <div className={'h-full relative hidden lg:flex flex-col p-12 pr-32'}>
                 {/*LOGO*/}
                 <div className={'flex items-center gap-2 mb-16'}>
                     <Music width={25} height={25} className={'text-primary'}/>
@@ -44,11 +47,19 @@ const RegisterLayout = (
 
                 {/*STEPS*/}
                 <Steps step={step}/>
+
+                <Image
+                    src={'/register/music.gif'}
+                    alt={'someone playing music'}
+                    width={50} height={50}
+                    className={'absolute bottom-0 w-2/3'}
+                />
             </div>
 
             <div className={'w-full h-full bg-white flex justify-center items-center p-12 lg:p-40'}>
-
-                {children}
+                <RegisterDataContextProvider>
+                    {children}
+                </RegisterDataContextProvider>
 
                 <StepIndicator step={step}/>
 
