@@ -6,6 +6,7 @@ import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
 import { RegisterDataContext } from '@/features/register/contexts/registerDataContext';
 import { validateEmail } from '@/features/register/utils/utils';
 import { redirect } from 'next/navigation';
+import Link from "next/link";
 
 const PersonalInfo = () => {
     const context = useContext(RegisterDataContext);
@@ -76,10 +77,16 @@ const PersonalInfo = () => {
                 <div className="flex flex-col items-center gap-1">
                     <h1 className="font-bold text-3xl">Your details</h1>
                     <h2>Please provide your name and email.</h2>
+                    <div className="text-center text-xs">
+                        <span>Already have an account ? </span>
+                        <Link href="/login" className="text-slate-700 underline hover:text-primary">
+                            Sign in
+                        </Link>
+                    </div>
                 </div>
 
                 <button className="btn btn-outline text-slate-700 flex items-center gap-2 w-full">
-                    <Image src="/google.png" alt="google" width={25} height={25} /> Sign up with Google
+                    <Image src="/google.png" alt="google" width={25} height={25}/> Sign up with Google
                 </button>
 
                 <div className="divider my-0">OR</div>

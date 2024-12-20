@@ -1,66 +1,67 @@
-import { Injectable } from '@nestjs/common'
-import { Prisma } from '@prisma/client'
-import { DatabaseService } from 'src/database/database.service'
-import * as bcrypt from 'bcrypt'
-import { JwtService } from '@nestjs/jwt'
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { DatabaseService } from 'src/database/database.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    private readonly databaseService: DatabaseService,
+  ) {}
 
-  constructor(private readonly databaseService: DatabaseService, private jwtService: JwtService) {}
+  // creating user
+  async create(data: Prisma.UserCreateInput) {
+    
+    // get the user data
+    const {firstName, lastName, email, password, description, interest} = data;
 
-  async validateUser(loginUserDto: Prisma.UserCreateInput) {
-    const {username, password} = loginUserDto
-    const user = await this.databaseService.user.findUnique({ where: { username } })
-    if (!user) {
-      return {user: false, password: false}
-    }
-    const isPasswordValid = await bcrypt.compare(password, user.password)
-    if (isPasswordValid) {
-      const register = this.jwtService.sign({id: user.id})
-      return {userId: user.id, register}
-    }
-    else {
-      return {user: true, password: false}
-    }
-  }
+    // hashing the password
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-  async create(createUserDto: Prisma.UserCreateInput) {
-    const {username, password} = createUserDto
-
-    const passwordHash = await bcrypt.hash(password, 10)
-
-    // Create the user
-    const createdUser = await this.databaseService.user.create({ data: { username: username, password: passwordHash } })
-
-
-
-    if(!createdUser) {
-      return new Error('User not created')
-    }
-    else {
-      const register = this.jwtService.sign({id: createdUser.id})
-      return {userId: createdUser.id, register}
-    }
-
-  }
-
-  findAll() {
-    return this.databaseService.user.findMany();
-  }
-
-  findOne(id: number) {
-    return this.databaseService.user.findUnique({ where: { id } });
-  }
-
-  update(id: number, updateUserDto: Prisma.UserUpdateInput) {
-    return this.databaseService.user.update({
-      where: { id },
-      data: updateUserDto,
+    // create the user
+    const user = await this.databaseService.user.create({
+      data: {
+        firstName: firstName.toLowerCase(),
+        lastName: lastName.toLowerCase(),
+        email: email.toLowerCase(),
+        password: hashedPassword,
+        description,
+        interest,
+      },
     });
+
+    return user;
   }
 
-  remove(id: number) {
-    return this.databaseService.user.delete({ where: { id } });
+  
+  
+  async signIn (email: string, password: string) {
+    const user = await this.databaseService.user.findUnique({
+      where: {email: email.toLowerCase()}
+    });
+
+    if(!user) {
+      return {email: false, password: false};
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if(!isPasswordValid) {
+      return {email: true, password: false};
+    } 
+
+    return {email: true, password: true, user};
+
   }
+
+  // get user 
+  async findOne(id: number) {
+    const userWithPassword = await this.databaseService.user.findUnique({
+      where: {id: id}
+    });
+
+    const {password, ...user} = userWithPassword;
+  }
+
 }

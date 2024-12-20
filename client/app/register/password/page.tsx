@@ -2,7 +2,7 @@
 import { ChevronLeft, KeyRound } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
+import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
 import { RegisterDataContext } from '@/features/register/contexts/registerDataContext';
 import { redirect } from 'next/navigation';
 
@@ -18,6 +18,14 @@ const Password = () => {
     }
 
     const { user, setUser } = context;
+
+    // Check if required fields are filled on component mount
+    useEffect(() => {
+        if (!user.firstName || !user.lastName || !user.email) {
+            // Redirect to /login/personal-info if any field is empty
+            redirect('/register/personal-info');
+        }
+    }, [user.firstName, user.lastName, user.email]);
 
     // Handle input changes for both password and confirm password fields
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +114,6 @@ const Password = () => {
                         {confirmPasswordError && <span className="text-red-500 text-xs mt-1">{confirmPasswordError}</span>}
                     </label>
                 </div>
-
 
                 <button onClick={handleContinue} className="btn w-full bg-primary border-none text-white">
                     Continue
