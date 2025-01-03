@@ -2,7 +2,7 @@
 import { ChevronLeft, KeyRound } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
+import {ChangeEvent, useCallback, useContext, useEffect, useState} from 'react';
 import { RegisterDataContext } from '@/features/register/contexts/registerDataContext';
 import { redirect } from 'next/navigation';
 
@@ -18,6 +18,13 @@ const Password = () => {
     }
 
     const { user, setUser } = context;
+
+    // check if user is connected with Google
+    useEffect(() => {
+        if(user.googleUserToken !== '') {
+            redirect('/register/interest')
+        }
+    }, [user.googleUserToken]);
 
     // Check if required fields are filled on component mount
     useEffect(() => {
@@ -37,8 +44,7 @@ const Password = () => {
     };
 
     // Form validation
-    const handleContinue = (e: MouseEvent) => {
-        e.preventDefault();
+    const handleContinue = useCallback(() => {
 
         // Reset errors
         setPasswordError('');
@@ -55,13 +61,28 @@ const Password = () => {
         }
 
         // Final form validation
-        const isFormValid = user.password.length >= 8 && user.password === user.confirmedPassword;
-        setIsFormValid(isFormValid);
+        const FormValid = user.password.length >= 8 && user.password === user.confirmedPassword;
+        setIsFormValid(FormValid);
 
         if (isFormValid) {
             redirect('/register/interest');
         }
-    };
+    }, [user, setPasswordError, setConfirmPasswordError, setIsFormValid, isFormValid]);
+
+    // Check if the Enter button is pressed
+    useEffect(() => {
+        const handleKeyDown = async (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                handleContinue();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleContinue]);
 
     return (
         <motion.div

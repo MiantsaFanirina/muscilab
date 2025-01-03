@@ -7,6 +7,7 @@ import StepIndicator from "@/features/register/components/stepIndicator";
 import {usePathname} from "next/navigation";
 import Image from "next/image";
 import {RegisterDataContextProvider} from "@/features/register/contexts/registerDataContext";
+import { GoogleOAuthProvider } from "@react-oauth/google"
 
 const RegisterLayout = (
     {
@@ -35,7 +36,7 @@ const RegisterLayout = (
     }, [pathname])
 
     return (
-        <div className="w-full h-screen bg-slate-50 flex">
+        <div className="w-full h-screen bg-slate-50 shadow-[inset_0px_4px_25px_-20px_rgba(0,_0,_0,_0.1)] flex">
 
 
             <div className={'h-full relative hidden lg:flex flex-col p-12 pr-32'}>
@@ -58,7 +59,9 @@ const RegisterLayout = (
 
             <div className={'w-full h-full bg-white flex justify-center items-center p-12 lg:p-40'}>
                 <RegisterDataContextProvider>
-                    {children}
+                    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_OAUTH_GOOGLE_CLIENT_ID}`}>
+                        {children}
+                    </GoogleOAuthProvider>
                 </RegisterDataContextProvider>
 
                 <StepIndicator step={step}/>

@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL DEFAULT '',
     "description" TEXT NOT NULL DEFAULT '',
     "interest" TEXT NOT NULL DEFAULT '',
+    "googleUserToken" TEXT DEFAULT '',
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );

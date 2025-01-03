@@ -1,6 +1,6 @@
 'use client'
 import {motion} from "framer-motion";
-import {useState} from 'react';
+import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import Image from 'next/image';
 import {User} from "lucide-react";
 import Link from "next/link";
@@ -14,7 +14,8 @@ const LoginPage = () => {
     const [passwordError, setPasswordError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
 
         if (name === 'email') {
@@ -24,7 +25,7 @@ const LoginPage = () => {
         }
     };
 
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         let isValid = true;
         if (!email) {
             setEmailError('Email is required');
@@ -43,30 +44,45 @@ const LoginPage = () => {
         }
 
         return isValid;
-    };
+    }, [email, password]);
 
-    const handleLogin = async () => {
+    const handleLogin = useCallback(async () => {
         if (validateForm()) {
             setIsLoading(true);
-            const res = await login({email, password});
+            const res = await login({ email, password });
             console.log(res);
+
             if (res.token) {
                 localStorage.setItem('authToken', res.token);
                 setIsLoading(false);
-                redirect('/home');
+                redirect('/music');
+            } else {
+                if (!res.email) {
+                    setEmailError('Invalid email');
+                }
+                if (!res.password) {
+                    setPasswordError('Wrong password');
+                }
+                setIsLoading(false);
             }
-
-            if(!res.email) {
-                setEmailError('Invalid email');
-                setIsLoading(false)
-            }
-            if (!res.password) {
-                setPasswordError('Wrong password');
-                setIsLoading(false)
-            }
-
         }
-    };
+    }, [email, password, validateForm, setEmailError, setPasswordError, setIsLoading]);
+
+    // Check if the Enter button is pressed
+    useEffect(() => {
+        const handleKeyDown = async (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                await handleLogin();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        // Cleanup event listener on component unmount
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleLogin]);
 
     return (
         <motion.div
@@ -83,7 +99,7 @@ const LoginPage = () => {
                     <h2>Welcome back! Please enter your credentials.</h2>
 
                     <div className="text-center text-xs">
-                        <span>Don't have an account ? </span>
+                        <span>Don&#39;t have an account ? </span>
                         <Link href="/register" className="text-slate-700 underline hover:text-primary">
                             Click here to register
                         </Link>

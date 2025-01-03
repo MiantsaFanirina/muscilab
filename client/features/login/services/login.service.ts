@@ -1,8 +1,7 @@
 'use server';
-import { User } from '@/features/register/types/types';
 
 export const login = async (user: {email: string, password: string}) => {
-    const API_URL = process.env.API_URL;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
     if (!API_URL) {
         throw new Error('API_URL environment variable is not defined');
     }
@@ -23,7 +22,7 @@ export const login = async (user: {email: string, password: string}) => {
             return { error: `Error: ${response.status} - ${errorData.message || response.statusText}` };
         }
 
-        // Return the parsed JSON data directly without storing it in a redundant variable
+        // Return the parsed JSON data
         return await response.json();
     } catch (error) {
         console.error('Sign in error:', error);
@@ -33,7 +32,7 @@ export const login = async (user: {email: string, password: string}) => {
             return { error: `Sign in failed: ${error.message}` };
         }
 
-        // Return a structured error message if the error is not an instance of `Error`
+        // Return a message if the error is not an instance of `Error`
         return { error: 'An unexpected error occurred during sign in' };
     }
 };

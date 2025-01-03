@@ -6,4 +6,5 @@ export type User = {
     confirmedPassword: string,
     description: string,
     interest: string
+    googleUserToken: string
 }

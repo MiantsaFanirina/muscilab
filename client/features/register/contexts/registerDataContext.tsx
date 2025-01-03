@@ -23,6 +23,7 @@ export const RegisterDataContextProvider = ({ children }: RegisterDataContextPro
         confirmedPassword: '',
         description: '',
         interest: '',
+        googleUserToken: '',
     });
 
     return <RegisterDataContext.Provider value={{ user, setUser }}>{children}</RegisterDataContext.Provider>;

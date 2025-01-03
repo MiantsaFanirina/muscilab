@@ -5,30 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d578789-13e0-44b8-beee-b33f88a965f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/login/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/login/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/features/login/services/login.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/features/register/services/register.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/../api/bun.lockb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../api/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/prisma/db.sql" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api/prisma/migrations/20241212104852_posts_likes_ratings_comments_and_share/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(core)/(explore)/events/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(core)/(explore)/explore/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(core)/(explore)/music/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(core)/(explore)/video/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/core/components/sidebar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/core/components/sidebarLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/core/data/sidebarData.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/core/music/components/musicContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/prisma/dev.db" beforeDir="false" afterPath="$PROJECT_DIR$/../api/prisma/dev.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/prisma/migrations/20240214195039_initial_migration/migration.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/prisma/migrations/20240222051306_fix_orders_schema/migration.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/prisma/migrations/20241025122843_user/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/prisma/migrations/20241210092016_users/migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../api/prisma/migrations/20241212081347_users/migration.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/../api/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/src/users/users.controller.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/users/users.controller.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/src/users/users.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/users/users.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/src/users/users.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/users/users.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/src/users/users.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/users/users.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/src/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/users/users.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(core)/home/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/components/scrollableContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(core)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(core)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/login/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/register/interest/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/interest/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/register/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/register/password/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/password/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/register/personal-info/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/personal-info/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lockb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/GoogleAuth/GetGoogleUserInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/GoogleAuth/GetGoogleUserInfo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/authGard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/authGard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/post/components/MediaContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/context/scrollableContentContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/post/components/TextContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/music/components/artistCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/post/components/postCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/music/components/musicCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/post/components/postCardContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/music/components/musicHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/core/post/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/core/type/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/login/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/login/services/login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/register/contexts/registerDataContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/register/contexts/registerDataContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/register/services/register.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/register/services/register.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/register/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/register/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +50,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="CSS File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
@@ -63,7 +75,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/miant/OneDrive/Documents/DEV/muscilab/client/features/login",
+    "last_opened_file_path": "C:/Users/miant/OneDrive/Documents/DEV/muscilab/client/app/(core)/(explore)/music",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,14 +89,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\features\login" />
-      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\login" />
-      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\register\interest" />
-      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\register" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\(core)\(explore)\music" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\(core)\(explore)" />
       <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\(core)" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\features\login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\features\register" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\(core)" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\features\core\components" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\app\(core)\(explore)" />
+      <recent name="C:\Users\miant\OneDrive\Documents\DEV\muscilab\client\features\core" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -104,11 +121,41 @@
       <workItem from="1733580519915" duration="5124000" />
       <workItem from="1733649593449" duration="4547000" />
       <workItem from="1733719365980" duration="40633000" />
-      <workItem from="1733808240563" duration="9067000" />
+      <workItem from="1733808240563" duration="14216000" />
+      <workItem from="1733928477758" duration="2215000" />
+      <workItem from="1733936392681" duration="7811000" />
+      <workItem from="1733984534278" duration="47000" />
+      <workItem from="1733986193023" duration="8985000" />
+      <workItem from="1734173485199" duration="869000" />
+      <workItem from="1734259678383" duration="6752000" />
+      <workItem from="1734527601880" duration="3200000" />
+      <workItem from="1734542244126" duration="3194000" />
+      <workItem from="1734674820877" duration="2212000" />
+      <workItem from="1734678557172" duration="6592000" />
+      <workItem from="1734702857814" duration="4114000" />
+      <workItem from="1734708497972" duration="10437000" />
+      <workItem from="1734936888394" duration="774000" />
+      <workItem from="1734938232598" duration="9949000" />
+      <workItem from="1734970453911" duration="2643000" />
+      <workItem from="1735295167029" duration="470000" />
+      <workItem from="1735396464762" duration="2221000" />
+      <workItem from="1735739312791" duration="1640000" />
+      <workItem from="1735745658844" duration="1802000" />
+      <workItem from="1735909571947" duration="17418000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/layout.tsx</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

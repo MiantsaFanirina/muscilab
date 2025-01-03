@@ -2,11 +2,13 @@
 import { Flag } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
+import {ChangeEvent, useCallback, useContext, useEffect, useState} from 'react';
 import { RegisterDataContext } from '@/features/register/contexts/registerDataContext';
 import { validateEmail } from '@/features/register/utils/utils';
 import { redirect } from 'next/navigation';
 import Link from "next/link";
+import {useGoogleLogin } from '@react-oauth/google';
+import {GetGoogleUserInfo} from "@/features/GoogleAuth/GetGoogleUserInfo";
 
 const PersonalInfo = () => {
     const context = useContext(RegisterDataContext);
@@ -21,6 +23,26 @@ const PersonalInfo = () => {
 
     const { user, setUser } = context;
 
+
+    // get user from Google
+    useEffect(() => {
+        (async () => {
+            if (user.googleUserToken !== '') {
+                const googleUser = await GetGoogleUserInfo(user.googleUserToken);
+                if(googleUser.sub) {
+                    setUser((prevUser) => ({
+                        ...prevUser,
+                        firstName: googleUser.given_name,
+                        lastName: googleUser.family_name,
+                        email: googleUser.email,
+                    }));
+                    redirect('/register/interest');
+                }
+            }
+        })();
+    }, [user.googleUserToken, setUser])
+
+
     // Handle input changes
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -31,8 +53,7 @@ const PersonalInfo = () => {
     };
 
     // Form validation
-    const handleContinue = (e: MouseEvent) => {
-        e.preventDefault();
+    const handleContinue = useCallback(() => {
 
         // Reset errors
         setEmailError('');
@@ -62,7 +83,34 @@ const PersonalInfo = () => {
         if (valid) {
             redirect('/register/password');
         }
-    };
+    }, [user, setEmailError, setFirstNameError, setLastNameError]);
+
+    // Check if the Enter button is pressed
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                handleContinue();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleContinue]);
+
+
+    // login with Google
+    const RegisterWithGoogle = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            setUser((prevUSer) => ({
+                ...prevUSer,
+                googleUserToken: codeResponse.access_token
+            }))
+        },
+        onError: (error) => console.log('Login Failed:', error)
+    });
 
     return (
         <motion.div
@@ -85,7 +133,10 @@ const PersonalInfo = () => {
                     </div>
                 </div>
 
-                <button className="btn btn-outline text-slate-700 flex items-center gap-2 w-full">
+                <button
+                    onClick={() => RegisterWithGoogle()}
+                    className="btn btn-outline text-slate-700 flex items-center gap-2 w-full"
+                >
                     <Image src="/google.png" alt="google" width={25} height={25}/> Sign up with Google
                 </button>
 

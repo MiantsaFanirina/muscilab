@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useState, useEffect } from 'react';
+import {useContext, useState, useEffect, useCallback} from 'react';
 import { ChevronLeft, Headphones } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -26,20 +26,22 @@ const Interest = () => {
     }
 
     const { user, setUser } = context;
+    console.log(user)
 
     // Redirect to personal info step if required fields are missing
     useEffect(() => {
-        if (!user.firstName || !user.lastName || !user.email) {
+        if (user.googleUserToken === '' && (!user.firstName || !user.lastName || !user.email))
+        {
             redirect('/register/personal-info');
         }
-    }, [user.firstName, user.lastName, user.email]);
+    }, [user.firstName, user.lastName, user.email, user.googleUserToken]);
 
     // Redirect to password step if password fields are missing
     useEffect(() => {
-        if (!user.password || !user.confirmedPassword) {
+        if(user.googleUserToken === '' && (!user.password || !user.confirmedPassword)) {
             redirect('/register/password');
         }
-    }, [user.password, user.confirmedPassword]);
+    }, [user.password, user.confirmedPassword, user.googleUserToken]);
 
     // Handle text area input for the description
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,7 +62,7 @@ const Interest = () => {
     };
 
     // Handle the registration process when the Register button is clicked
-    const handleRegister = async () => {
+    const handleRegister = useCallback(async () => {
         let hasError = false;
 
         // Check if an interest is selected
@@ -81,16 +83,31 @@ const Interest = () => {
             setDescriptionError('');
             setIsLoading(true); // Indicate loading state
 
-            const token = await register(user)
+            const token = await register(user);
             if (token) {
-
                 // Save the token in local storage
                 localStorage.setItem('authToken', token.token);
                 setIsLoading(false);
-                redirect('/home')
+                redirect('/music');
             }
         }
-    };
+    }, [selectedInterest, user, setError, setDescriptionError, setIsLoading]);
+
+    // Check if the Enter button is pressed
+    useEffect(() => {
+        const handleKeyDown = async (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                await handleRegister();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        // Cleanup event listener on component unmount
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleRegister]);
 
     return (
         <motion.div
@@ -175,13 +192,13 @@ const Interest = () => {
                 </div>
 
                 {/* Previous Link */}
-                <Link
+                {user.googleUserToken === '' ? <Link
                     href="/register/password"
                     className="absolute -top-10 lg:-top-20 -left-6 lg:-left-36 flex items-center text-sm hover:text-primary"
                 >
-                    <ChevronLeft width={20} height={20} />
+                    <ChevronLeft width={20} height={20}/>
                     Previous
-                </Link>
+                </Link> : <></>}
             </div>
         </motion.div>
     );
